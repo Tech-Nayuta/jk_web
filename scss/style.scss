@@ -1,0 +1,624 @@
+@charset "utf-8";
+
+$background-url: "https://www.demi.nicca.co.jp/communication/images/fukuoka.jpg";
+$main-color: black;
+$header-height: 70px;
+
+// 背景の設定（画像+ぼかし）----
+@mixin make_background($background-url){
+	background-image: url($background-url);
+	background-attachment: fixed;
+	background-size:cover;
+	overflow: hidden;			//ぼかしの影響を消す
+	position: relative;
+	z-index: 0;
+
+	&:before{
+		background: inherit;
+		content: '';
+		filter: blur(5px);
+		position: absolute;
+		top: -5px;
+		right: -5px;
+		bottom: -5px;
+		left: -5px;
+		z-index: -1;
+	}
+
+	&__contents{
+		background-color: white;
+		border-radius: 10px;
+		box-shadow: 2px 2px 4px gray;
+		font-size:20px;
+		padding:20px;
+		margin:30px;
+	}
+}
+//----------------
+
+/*PC・タブレット・スマホ(全端末)共通設定
+------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*全体の設定
+---------------------------------------------------------------------------*/
+body {
+	margin: 0px;
+	padding: 0px;
+	-webkit-text-size-adjust: none;
+	color:$main-color;	/*全体の文字色*/
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;	/*フォント種類*/
+	font-size: 16px;	/*文字サイズ*/
+	line-height: 2;		/*行間*/
+	background: #fff;	/*背景色*/
+}
+h1,h2,h3,h4,h5,p,ul,ol,li,dl,dt,dd,form,figure,form,select,input,textarea,nav {margin: 0px;padding: 0px;font-size: 100%;font-weight: normal;}
+ul {list-style-type: none;}
+ol {padding-left: 40px;padding-bottom: 15px;}
+img {border: none;max-width: 100%;height: auto;vertical-align: middle;}
+table {border-collapse:collapse;font-size: 100%;border-spacing: 0;}
+iframe {width: 100%;}
+
+/*リンク（全般）設定
+---------------------------------------------------------------------------*/
+a {
+	color: white;	/*リンクテキストの色*/
+	cursor: pointer;
+	transition: 0.3s;	/*マウスオン時の移り変わるまでの時間設定。0.3秒。*/
+}
+
+/*コンテナー（ホームページを囲む一番外側のブロック）
+---------------------------------------------------------------------------*/
+#container {
+	margin: 0 auto;
+}
+
+/*ヘッダー（ロゴが入った最上段のブロック）
+---------------------------------------------------------------------------*/
+/*headerブロック*/
+header {
+	background-color: $main-color;
+	backdrop-filter: blur(6px);
+	display:flex;
+	height:$header-height;
+	justify-content: space-between;
+	opacity: 0.8;
+	position: fixed;
+	text-align: center;	/*内容を中央よせ*/
+	width: 100%;
+	z-index:100;
+}
+/*ロゴ画像設定*/
+#img {
+	width: 400px;	/*画像幅*/
+	margin: 40px auto 40px;	/*ロゴの上と下に40pxスペースを空ける設定*/
+}
+
+#maining{
+	position:relative;
+	cursor: pointer;
+}
+
+h2{
+	font-size:25px;
+}
+
+.top-message{
+	background-color: transparent;
+	color: white;
+	font-size: 30px;
+	opacity:0.7;
+	position: absolute;
+	top: 320px;
+	left:20px;
+}
+
+.icontype-menu{
+	display:none;
+	width:200px;
+
+	.menu-icon {
+		color: white;
+  	font-size: 26px;
+		padding: 22px 0;
+		width:280px;
+	}
+
+		.menu-items{
+			display:none;
+			text-align:right;
+
+			.menu-item {
+					border-top: 1px solid	rgb(56, 56, 56);
+
+			a{
+					display: block;
+					width: 200px;
+					height: 50px;
+					text-align: center;
+					color: #fff;
+					font-size:20px;
+					line-height: 50px;
+					background: $main-color;
+					text-decoration: none;
+					box-sizing: border-box;
+
+					&:hover{
+						opacity:0.8;
+					}
+
+					&:active{
+						opacity:1.0;
+					}
+				}
+			}
+		}
+	// }
+}
+
+#logo {
+	// padding-top:10px;
+	width: 150px;
+	height: $header-height;
+}
+
+.logo {
+	height: $header-height;
+	opacity: 1.0;
+}
+
+/*トップページのメイン画像
+---------------------------------------------------------------------------*/
+/*画像ブロック*/
+// #mainimg img {
+	// border-radius: 10px;	/*角を丸くする指定。この１行を削除すれば角丸がなくなります。*/
+	// margin-bottom: 40px;	/*下に空けるスペース*/
+// }
+
+/*メニュー
+---------------------------------------------------------------------------*/
+/*メニュー全体を囲むブロック*/
+#menubar {
+	text-align: center;		/*文字をセンタリング*/
+	font-size: 18px;		/*文字サイズ*/
+	line-height: $header-height;
+	padding-right: 40px;
+	// margin-bottom: 40px;	/*下に空けるスペース*/
+
+	/*メニュー１個あたりの設定*/
+
+	li{
+		display: inline;	/*横並びにする設定*/
+
+		a{
+			text-decoration: none;
+			padding: 15px 30px;	/*各メニュー内の余白。上下に15px、左右に30pxあけるという意味。*/
+		}
+
+		a:hover {
+			color: white;	/*文字色*/
+			border-bottom: 4px solid $main-color;	/*下線の幅、線種、色*/
+		}
+	}
+}
+
+// /*メニュー１個あたりの設定*/
+// #menubar li {
+// 	display: inline;	/*横並びにする設定*/
+// }
+
+// #menubar li a {
+// 	text-decoration: none;
+// 	padding: 15px 30px;	/*各メニュー内の余白。上下に15px、左右に30pxあけるという意味。*/
+// }
+
+// /*マウスオン時の設定*/
+// #menubar li a:hover {
+// 	color: white;	/*文字色*/
+// 	border-bottom: 4px solid $main-color;	/*下線の幅、線種、色*/
+// }
+
+/*コンテンツ（見出しバーや文字などが入っているブロック）
+---------------------------------------------------------------------------*/
+
+// header, #contents {
+//   background-position: center;
+//   background-size: cover;
+//   background-attachment: fixed;
+// }
+
+// #contents:before {
+//   content: "";
+//   z-index: -1;
+//   -webkit-filter: blur(4px);
+//   -ms-filter: blur(4px);
+//   filter: blur(4px);
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   margin: 0;
+//   padding: 0;
+// }
+// #contents{
+// 	header & {
+// 		-webkit-filter: blur(5px);
+// 		filter: blur(5px);
+// 	}
+// }
+/*コンテンツのh2タグの設定*/
+#contents{
+	h2{
+	clear: both;
+	// margin-bottom: 20px;
+	color: #fff;		/*文字色*/
+	padding: 10px 20px;	/*上下、左右への余白*/
+	background: $main-color;	/*背景色*/
+	height:60px;
+	line-height:40px;
+	// border-radius: 10px;	/*角を丸くする指定。この１行を削除すれば角丸がなくなります。*/
+	}
+
+/*コンテンツのh3タグの設定*/
+	h3{
+
+	clear: both;
+	margin-bottom: 20px;
+	padding: 8px 20px;	/*上下、左右への余白*/
+	background: #fff;	/*背景色*/
+	border: 1px solid #ccc;	/*枠線の幅、線種、色*/
+	border-radius: 10px;	/*角を丸くする指定。この１行を削除すれば角丸がなくなります。*/
+}
+/*コンテンツのp(段落)タグ設定*/
+p {
+	padding: 0px 20px 20px;	/*上、左右、下への余白*/
+}
+/*他。微調整。*/
+p + p {
+	margin-top: -5px;
+}
+
+h3 + p {
+	margin-top: -10px;
+}
+
+section + section {
+}
+}
+
+/*Galleryページ
+---------------------------------------------------------------------------*/
+/*各ブロックごとの設定*/
+.list {
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;	/*下線の幅、線種、色*/
+	padding: 20px;	/*ボックス内の余白*/
+
+/*h4見出しの設定*/
+h4 {
+	color: $main-color;	/*文字色*/
+}
+/*画像の設定*/
+img {
+	width: 20%;			/*画像幅*/
+	float: left;		/*画像を左に回り込み*/
+	margin-right: 3%	/*画像の右側に空けるスペース*/
+}
+/*段落タグ*/
+p {
+	padding: 0 !important;
+}
+}
+
+/*フッター(ページ最下部のcopyrightのパーツ)設定
+---------------------------------------------------------------------------*/
+footer {
+
+	background-color:black;
+	clear: both;
+	color: #fff;		/*文字色*/
+	text-align: center;	/*文字をセンタリング*/
+	padding: 30px 0px 10px;	/*上、左右、下へのボックス内の余白*/
+
+	a {
+		text-decoration: none;
+		border: none;
+	}
+
+	.pr {
+		display: block;
+	}
+}
+
+/*トップページ内「更新情報・お知らせ」ブロック
+---------------------------------------------------------------------------*/
+/*ブロック全体の設定*/
+#new dl {
+	dl{
+	padding: 0px 20px;	/*上下、左右へのブロック内の余白*/
+	margin-bottom: 20px;	/*ブロックの下(外側)に空ける余白*/
+	}
+
+/*日付設定*/
+dt {
+	font-weight: bold;	/*太字にする設定。標準がいいならこの行削除。*/
+	float: left;
+	width: 8em;
+}
+/*記事設定*/
+dd {
+	padding-left: 8em;
+}
+}
+
+
+/*テーブル
+---------------------------------------------------------------------------*/
+/*テーブル１行目に入った見出し部分（※caption）*/
+.ta1{
+	caption{
+	border: 1px solid #999;	/*テーブルの枠線の幅、線種、色*/
+	border-bottom: none;	/*下線だけ消す*/
+	text-align: left;		/*文字を左寄せ*/
+	background: #eee;		/*背景色*/
+	font-weight: bold;		/*太字に*/
+	padding: 10px;			/*ボックス内の余白*/
+}
+/*テーブル１行目に入った見出し部分（※tamidashi）*/
+th.tamidashi {
+	width: auto;
+	text-align: left;	/*左よせ*/
+	background: #eee;	/*背景色*/
+}
+}
+/*ta1テーブルブロック設定*/
+.ta1 {
+	table-layout: fixed;
+	width: 100%;
+	margin: 0 auto 20px;
+
+	word-break: break-all;
+	border: 1px solid #999;	/*テーブルの枠線の幅、線種、色*/
+	padding: 10px;			/*テーブル内の余白*/
+
+td,th {
+	word-break: break-all;
+	border: 1px solid #999;	/*テーブルの枠線の幅、線種、色*/
+	padding: 10px;			/*テーブル内の余白*/
+}
+/*テーブルの左側ボックス*/
+th {
+	text-align: center;	/*センタリング*/
+	width: 30%;			/*幅*/
+}
+}
+
+/*トップページのNEWアイコン
+---------------------------------------------------------------------------*/
+.newicon {
+	background: #F00;	/*背景色*/
+	color: #FFF;		/*文字色*/
+	font-size: 70%;
+	line-height: 1.5;
+	padding: 2px 5px;
+	border-radius: 2px;
+	margin: 0px 5px;
+	vertical-align: text-top;
+}
+
+/*その他
+---------------------------------------------------------------------------*/
+.look {background: #e5e5e5;padding: 5px 10px;border-radius: 4px;}
+.mb15,.mb1em {margin-bottom: 15px;}
+.color1 {color: $main-color;}
+.pr {font-size: 12px;}
+.wl {width: 96%;}
+.ws {width: 50%;}
+.c {text-align: center;}
+.r {text-align: right;}
+.l {text-align: left;}
+
+
+.schedule, .about, .contact, .blog{
+	@include make_background($background-url);
+}
+
+.about__wrapper {
+	.arrow-icon{
+		text-align:center;
+	}
+
+	.open-contents{
+		display: none;
+		
+		.img{
+			border:1px solid $main-color;
+			margin-top:20px;
+		}
+	}
+}
+
+.access{
+	@include make_background($background-url);
+
+	display:flex;
+	justify-content: center;
+	padding-top:30px;
+	padding-bottom:30px;
+
+	.access-sns{
+		width:750px;
+		display:flex;
+		justify-content:space-between;
+
+		.twitter{
+			// border: solid 1px gray;
+			background-color: #00acee;
+			border-radius: 10px;
+			box-shadow: 2px 2px 4px gray;
+			padding:20px;
+
+			display:flex;
+			flex-direction: column;
+
+			.fa-twitter{
+				margin-bottom:30px;
+				text-align:center;
+				color: white;
+			}
+		}
+
+		.instagram{
+			// border: solid 1px gray;
+			background-color: #f5b0e0;
+			border-radius: 10px;
+			box-shadow: 3px 3px 6px gray;
+			padding:20px;
+
+			display:flex;
+			flex-direction: column;
+
+			.icon-character{
+				display:flex;
+				margin-bottom:30px;
+
+				.fa-instagram{
+					display: inline-block;
+					width: 54px;
+					height: 54px;
+				  text-align: center;
+					border-radius: 10px;
+					color: #fff;
+					vertical-align: middle;
+					background: #d6249f;
+					background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+					box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+				}
+
+				.instagram-character{
+					font-size:42px;
+					line-height:54px;
+					padding-left:15px;
+				}
+			}
+		}
+	}
+}
+
+.blog{
+	display:flex;
+	justify-content: center;
+
+	&__contents{
+		display:flex;
+		justify-content: space-between;
+
+
+		.blog-image{
+			width:50%;
+		
+			a{
+				.blog-show{
+					border: 1px solid $main-color;
+					border-radius: 5px;
+					position:relative;
+
+					.hatena{
+						border-radius:5px;
+					}
+
+					.jk_picture{
+						border-radius:5px;
+						display:none;
+						opacity: 0.5;
+						position: absolute;
+						top:5px;
+						left:5px;
+						height:25%;
+					}
+				}
+			}
+		}
+
+		.discription{
+			font-size:20px;
+			width:47%;
+		}
+	}
+}
+
+.contact-section {
+  color: #6a6a6a;
+}
+
+// .contact-section-inner {
+//   padding-bottom: 70px;
+// }
+
+.contact-section h3, .contact-section h4 {
+  color: #404040;
+}
+
+.contact-section h4 {
+  font-size: 22px;
+  padding-bottom: 10px;
+}
+
+.contact-form input[type="text"], .contact-form textarea {
+  margin: 0;
+  padding: 0 10px;
+  vertical-align: middle;
+  background: rgba(0, 0, 0, 0.08);
+	border: none;
+	display:flex;
+	flex-direction: column;
+  width: 100%;
+  color:black;
+  // font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  // font-weight: 300;
+  border-radius: 0;
+  box-shadow: none;
+  transition: all .3s;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+textarea {
+  height: 150px;
+}
+
+.contact-form {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+
+$btn-color:black;
+
+.btn-contact {
+  font-family: 'Dosis', sans-serif;
+  font-size: 18px;
+  // font-weight: 600;
+  background: $btn-color;
+  border: 1px solid $btn-color;
+  color: white;
+  box-shadow: inset 0 1px 0 $btn-color;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  transition: all .3s;
+  margin: 10px 0;
+	padding: 15px 35px;
+	
+	&:hover{
+		color:white;
+		background-color:rgb(36, 35, 35)
+	}
+
+	&:active{
+		color:white;
+		background-color:$btn-color;
+	}
+}
+
+.error-message {
+  color: #F51414;
+  height: 20px;
+}
